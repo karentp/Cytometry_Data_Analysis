@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Home</h1>
+    {% if error %}
+        <p class="text-danger">{{ error }}</p>
+    {% endif %}
+    {% if success %}
+        <p class="text-success">{{ success }}</p>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+{% endblock %}
