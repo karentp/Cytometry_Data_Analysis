@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from matplotlib import pyplot as plt
 
-from cytometry.analysis.models import UploadedFile
+from .models import UploadedFile
 from .forms import FileUploadForm
 import flowkit
 
@@ -16,8 +16,12 @@ def home(request):
         for file in files:
             if not file.name.endswith('.fcs'):
                 return render(request, 'home.html', {'form': FileUploadForm(), 'error': 'Only .fcs files are allowed'})
-            uploaded_file = UploadedFile.objects.create(file=file)
-            uploaded_file.save()
+            fs = FileSystemStorage()
+            filename = fs.save(file.name, file)
+            print("filename: ", file, " filepath: ", filename)
+            uploaded_file = UploadedFile.objects.create(file=file, file_path=filename)
+
+        request.session['file_path'] = uploaded_file.file_path
         return render(request, 'home.html', {'form': FileUploadForm(), 'success': 'File(s) uploaded successfully'})
     else:
         form = FileUploadForm()
