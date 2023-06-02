@@ -230,11 +230,42 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="text-center my-auto">
-                        <span>Footer content here</span>
+                        <!-- Footer -->
+                        <section id="footer">
+                            <div class="container">
+                                {% for pie in pieDePagina %}
+                                <div class="row no-gutter">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="col-padded col-naked">
+                                            <ul class="list-unstyled clear-margins">
+                                                <li class="widget-container widget_recent_news">
+                                                    <h2 class="title-widget">{{ pie.titulo }}</h2>
+                                                    <div itemscope itemtype="">
+                                                        <h2 class="title-median m-contact-subject" itemprop="name">Información de Contacto</h2>
+                                                        <div class="m-contact-tel-fax">
+                                                            <span class="m-contact-tel">Tel: <span itemprop="tel">{{ pie.tel }}</span></span>
+                                                            <span class="m-contact-fax">Email: <span itemprop="fax"><a href="mailto:{{ pie.email }}">{{ pie.email }}</a></span></span>
+                                                        </div>
+                                                        <div class="social-icons">
+                                                            <ul class="list-unstyled list-inline">
+                                                                <li><a class="fab fa-facebook-f" href="{{ pie.facebook }}"><span class="label">Facebook</span></a></li>
+                                                                <li><a class="fab fa-instagram" href="{{ pie.instagram }}"><span class="label">Instagram</span></a></li>
+                                                                <li><a class="fab fa-youtube" href="{{ pie.youtube }}"><span class="label">Youtube</span></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </section>
                     </div>
                 </div>
             </footer>
-            <!-- End of Footer -->
+<!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->

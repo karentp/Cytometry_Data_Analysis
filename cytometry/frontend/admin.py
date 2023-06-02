@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import PieDePagina  # importa tu modelo aquí
 
-# Register your models here.
+admin.site.register(PieDePagina)  # registra tu modelo aquí
