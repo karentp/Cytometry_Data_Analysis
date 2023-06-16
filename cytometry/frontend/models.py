@@ -29,3 +29,11 @@ class PieDePagina(models.Model):
 
     def __str__(self):
         return self.titulo
+class Colaborador(models.Model):    
+    nombre = models.CharField(max_length=200)
+    imagen = models.ImageField(upload_to='colaboradores')
+    descripcion = models.TextField()
+    enlace = models.URLField(blank=True, null=True)  # Opcional, en caso de que tengan un perfil o página externa
+
+    def __str__(self):
+        return self.nombre

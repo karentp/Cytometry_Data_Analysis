@@ -20,7 +20,24 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <style>
 
+        .card-colab {
+            height: 450px; /* Define una altura específica. Ajusta este valor según tus necesidades */
+            display: flex;
+            flex-direction: column; 
+            border: 1px solid #e3e6f0;
+            border-radius: 0.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-body-colab {
+            flex-grow: 1; /* Esto asegura que el cuerpo de la tarjeta ocupe todo el espacio disponible */
+            overflow: auto; /* Esto permitirá que los usuarios hagan scroll si el contenido excede la altura de la tarjeta */
+            padding: 1rem;
+}
+
+    </style>
 
 </head>
 
@@ -40,7 +57,6 @@
                 <div class="sidebar-brand-text mx-3">Cytrometry</div>
             </a>
 
-            
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -48,33 +64,28 @@
             <div class="sidebar-heading">
                 Menú
             </div>
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+
+            <!-- Nav Item - Analysis -->
+            <li class="nav-item">
                 <a class="nav-link" href="/analysis/">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Analysis</span></a>
             </li>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+            {% for seccion in secciones %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#{{ seccion.titulo|slugify }}">
+                        <span>{{ seccion.titulo }}</span>
+                    </a>
+                </li>
+            {% endfor %}
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                <a class="nav-link" href="#colaboradores">
+                    <span>Colaboradores</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
             </li>
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -167,6 +178,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'signup' %}">Signup</a>
+                                </li>
                             {% endif %}
                         
                         </ul>
@@ -188,18 +202,53 @@
                     <div class="row">
 
                         <!-- Content Column -->
-                        <div class="col-lg-6 mb-4">
+                        <div class="col">
 
 
                             <!-- Approach -->
-                            <div class="card shadow mb-4">
+                            {% for seccion in secciones %}
+                            <div class="card shadow mb-4" id="{{ seccion.titulo|slugify }}">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">{{textos.titulo}}</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">{{ seccion.titulo }}</h6>
                                 </div>
-                                <div class="card-body">
-                                    <p>{{textos.acercaDe}}</p>
+                                <div class="card-body d-flex">
+                                    <div class="col-md-8">
+                                        <p>{{ seccion.acercaDe }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img src="{{ seccion.imagen.url }}" class="img-fluid" alt="{{ seccion.titulo }}">
+                                    </div>
                                 </div>
                             </div>
+                            {% endfor %}
+                            <!-- Colaboradores -->
+                            <div class="card shadow mb-4" id="colaboradores">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Colaboradores</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        {% for colaborador in colaboradores %}
+                                            <div class="col-md-4">
+                                                <div class="card-colab">
+                                                    <img src="{{ colaborador.imagen.url }}" class="card-img-top" alt="{{ colaborador.nombre }}" style="height: 200px; object-fit: cover;">
+                                                    <div class="card-body-colab">
+                                                        <h5 class="card-title">{{ colaborador.nombre }}</h5>
+                                                        <p class="card-text">{{ colaborador.descripcion }}</p>
+                                                        {% if colaborador.enlace %}
+                                                            <a href="{{ colaborador.enlace }}" class="btn btn-primary">Ver perfil</a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+
 
                         </div>
                     </div>
@@ -276,7 +325,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
                 </div>
             </div>
         </div>

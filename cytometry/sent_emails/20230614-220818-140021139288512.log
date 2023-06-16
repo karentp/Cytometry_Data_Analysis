@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: kristel.herrera@ucr.ac.cr
+Date: Wed, 14 Jun 2023 22:08:18 -0000
+Message-ID: <168678049891.4316.6260826997798546131@kyra>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/accounts/reset/Mg/bpt1hu-ae27abb37980f28d6634adf6926b05f5/
+
+Your username, in case you’ve forgotten: hola
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------
