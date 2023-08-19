@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('analysis/', include(('analysis.urls', 'analysis'), namespace='analysis')),
     path('', include('frontend.urls')),
+    #Path de contact
+    path('contact/', include('contact.urls')),
     #Path de Auth
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('registration.urls')),

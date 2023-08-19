@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block content %}
+<!-- Topbar -->
+<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+  <!-- Sidebar Toggle (Topbar) -->
+  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <!-- Topbar Navbar -->
+  <ul class="navbar-nav ml-auto">
+    <!-- omitido para mantener la brevedad -->
+  </ul>
+</nav>
+<!-- End of Topbar -->
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <!-- Contact Form -->
+  <div class="row">
+    <div class="col-xl-9 col-lg-10 mx-auto">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h2 class="m-0 font-weight-bold text-primary">
+            <span class="section-heading-upper">Envíanos tus dudas</span>
+          </h2>
+        </div>
+        <div class="card-body">
+          <!-- Formulario de contacto -->
+        <table>
+            {{form.as_table}}
+        </table>
+              <div class="text-center">
+                  <input type="submit" class="btn btn-primary btn-block py-2" value="Enviar">
+              </div>
+          </form>
+          <!-- Fin formulario de contacto -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Contact Form -->
+</div>
+<!-- /.container-fluid -->
+{% endblock %}
